@@ -1,5 +1,5 @@
 _base_ = [
-    'pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py'
+    '../pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py'
     ]
 
 dataset_type = 'NematodosDataset'
