@@ -1,12 +1,13 @@
+from mmcv import mkdir_or_exist
 from mmcv import Config
 from mmseg.apis import set_random_seed
 from mmseg.utils import get_device
 
-data_root = '../../../mmsegmentation/data/nematodos'
+data_root = '../data/nematodos'
 img_dir = 'images'
 ann_dir = 'annotations'
 
-cfg = Config.fromfile('../../../mmsegmentation/configs/isanet/isanet_r50-d8_512x1024_40k_cityscapes.py')
+cfg = Config.fromfile('../configs/isanet/isanet_r50-d8_512x1024_40k_cityscapes.py')
 
 # Since we use only one GPU, BN is used instead of SyncBN
 cfg.norm_cfg = dict(type='BN', requires_grad=True)
@@ -33,10 +34,10 @@ train_pipeline = [
     dict(type='LoadAnnotations', reduce_zero_label=True),
     dict(type='Resize', img_scale=(1024, 1024), ratio_range=(0.5, 2.0)),
     dict(type='RandomRotate', prob=0.75, degree=180),
-    dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
+    dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
-    dict(type='Normalize', **img_norm_cfg),
-    dict(type='Pad', size=crop_size, pad_val=0, seg_pad_val=255),
+    dict(type='Normalize', **cfg.img_norm_cfg),
+    dict(type='Pad', size=cfg.crop_size, pad_val=0, seg_pad_val=255),
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_semantic_seg']),
 ]
@@ -102,6 +103,9 @@ cfg.log_config = dict(
              num_eval_images=100)
         ])
 
-# Let's have a look at the final config used for training
+# Look at the final config used for training
 print(f'Config:\n{cfg.pretty_text}')
-cfg.dump("../../../mmsegmentation/configs/isanet_nematodos.py")
+
+# Save config file
+mkdir_or_exist("../configs/_nematodos_/isanet")
+cfg.dump("../configs/_nematodos_/isanet/isanet_nematodos.py")
