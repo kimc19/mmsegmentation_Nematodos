@@ -2,8 +2,16 @@ from mmcv import mkdir_or_exist
 from mmcv import Config
 from mmseg.apis import set_random_seed
 from mmseg.utils import get_device
+import argparse
 
-data_root = '../data/nematodos'
+parser.add_argument('--data_root, type=str, help='Dirección de la carpeta con los datos.')
+args = parser.parse_args()
+
+if args.data_root == None:
+	data_root = '../data/nematodos'
+else:
+	data_root = args.data_root
+	
 img_dir = 'images'
 ann_dir = 'annotations'
 
