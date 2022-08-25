@@ -4,7 +4,7 @@ from mmseg.apis import set_random_seed
 from mmseg.utils import get_device
 import argparse
 
-parser.add_argument('--data_root, type=str, help='Dirección de la carpeta con los datos.')
+parser.add_argument('--data_root', type=str, help='Dirección de la carpeta con los datos.')
 args = parser.parse_args()
 
 if args.data_root == None:
