@@ -11,6 +11,7 @@
 import argparse
 import json
 import os
+import os.path as osp
 from PIL import Image, ImageDraw
 
 
@@ -48,13 +49,13 @@ for i in img_keys:
             x_list = current_img['regions'][0]['shape_attributes']['all_points_x']
             y_list = current_img['regions'][0]['shape_attributes']['all_points_y']
             coords = list(zip(x_list, y_list))
-            new_img = Image.new("RGB", img_dims)
+            new_img = Image.new("P", img_dims)
             img1 = ImageDraw.Draw(new_img)
             img1.polygon(coords, fill = 'white', outline = 'white')
             
             # save mask
-            #new_name = img_name[:-4] + '_mask.png'
-            new_img = new_img.save(args.mask_out + '/' + img_name )
+            new_name = osp.splitext(img_name, 0) + '.png'
+            new_img = new_img.save(args.mask_out + '/' + new_name )
             print(f'Saved {img_name}\'s mask as {img_name} ')
             
         else:
