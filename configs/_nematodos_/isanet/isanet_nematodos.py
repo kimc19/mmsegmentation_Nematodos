@@ -160,7 +160,10 @@ log_config = dict(
         dict(type='TextLoggerHook', by_epoch=False),
         dict(
             type='MMSegWandbHook',
-            init_kwargs=dict(project='Prueba_Nematodos_20'),
+            init_kwargs=dict(
+                entity='kimc19',
+                project='Nematodos_Isanet',
+                name='isanet_base'),
             log_checkpoint=True,
             num_eval_images=100)
     ])
