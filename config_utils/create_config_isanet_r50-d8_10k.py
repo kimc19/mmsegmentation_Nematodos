@@ -97,7 +97,11 @@ cfg.log_config = dict(
     hooks=[
         dict(type='TextLoggerHook', by_epoch=False),
         dict(type='MMSegWandbHook',
-             init_kwargs={'project': 'Prueba_Nematodos_20'},
+             init_kwargs={
+                 'entity': 'kimc19',
+                 'project': 'Nematodos_Isanet',
+                 'name': 'isanet_base'
+                 },
              log_checkpoint=True,
              #log_checkpoint_metadata=True,
              num_eval_images=100)
