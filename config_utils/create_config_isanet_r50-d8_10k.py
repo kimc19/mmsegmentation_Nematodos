@@ -47,6 +47,7 @@ train_pipeline = [
     dict(type='RandomRotate', prob=0.75, degree=180),
     dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.75),
     dict(type='RandomFlip', prob=0.5),
+    dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **cfg.img_norm_cfg),
     dict(type='Pad', size=cfg.crop_size, pad_val=0, seg_pad_val=255),
     dict(type='DefaultFormatBundle'),
@@ -91,9 +92,10 @@ cfg.data.test.split = 'splits/test.txt'
 
 cfg.work_dir = './work_dirs/isanet'
 
-cfg.runner.max_iters = 10000
-cfg.evaluation.interval = 10000
-cfg.checkpoint_config.interval = 2000
+#Set iterations, and interval of iterations save
+#cfg.runner.max_iters = 10000
+#cfg.evaluation.interval = 10000
+cfg.checkpoint_config.interval = 5000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
 # Set seed to facitate reproducing the result
@@ -102,7 +104,7 @@ set_random_seed(0, deterministic=False)
 cfg.gpu_ids = range(1)
 cfg.device = 'cuda' #get_device()
 
-# Set wand hook
+# Set hooks: Text, Wandb
 cfg.log_config = dict(
     interval=1000,
     hooks=[
@@ -111,7 +113,8 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'kimc19',
                  'project': 'Nematodos_Isanet',
-                 'name': 'isanet_base'
+                 'name': 'isanet_base',
+                 'id': 'isanet_base',
                  },
              log_checkpoint=True,
              #log_checkpoint_metadata=True,
