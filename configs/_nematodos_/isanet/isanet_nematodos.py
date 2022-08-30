@@ -163,7 +163,8 @@ log_config = dict(
             init_kwargs=dict(
                 entity='kimc19',
                 project='Nematodos_Isanet',
-                name='isanet_base'),
+                name='isanet_base',
+                id='isanet_base'),
             log_checkpoint=True,
             num_eval_images=100)
     ])
@@ -176,9 +177,9 @@ cudnn_benchmark = True
 optimizer = dict(type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0005)
 optimizer_config = dict()
 lr_config = dict(policy='poly', power=0.9, min_lr=0.0001, by_epoch=False)
-runner = dict(type='IterBasedRunner', max_iters=10000)
-checkpoint_config = dict(by_epoch=False, interval=2000, max_keep_ckpts=2)
-evaluation = dict(interval=10000, metric='mIoU', pre_eval=True)
+runner = dict(type='IterBasedRunner', max_iters=40000)
+checkpoint_config = dict(by_epoch=False, interval=5000, max_keep_ckpts=2)
+evaluation = dict(interval=4000, metric='mIoU', pre_eval=True)
 work_dir = './work_dirs/isanet'
 seed = 0
 gpu_ids = range(0, 1)
