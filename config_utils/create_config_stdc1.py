@@ -139,6 +139,9 @@ cfg.work_dir = './work_dirs/isanet'
 cfg.checkpoint_config.interval = 5000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
+# Set evaluations metrics
+cfg.evaluation.metric=['mIoU','mDice','mFscore']
+
 # Set seed to facitate reproducing the result
 cfg.seed = 0
 set_random_seed(0, deterministic=False)
