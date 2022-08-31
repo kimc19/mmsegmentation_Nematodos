@@ -80,7 +80,7 @@ cfg.data.workers_per_gpu = 2 #Wand support
 
 cfg.img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-cfg.crop_size = (512, 512)
+cfg.crop_size = (512, 1024)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=True),
