@@ -131,7 +131,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = './work_dirs/isanet'
+cfg.work_dir = '../work_dirs/isanet'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 40000
@@ -159,7 +159,8 @@ cfg.log_config = dict(
                  'project': 'Nematodos_STDC',
                  'name': 'stdc_base',
                  'id': 'stdc_base',
-                 'notes':'Entrenamiento con modelo stdc base con 80k iteraciones'
+                 'resume': 'allow',
+                 'notes':'Entrenamiento con modelo stdc base sin preentrenar con 80k iteraciones'
                  },
              log_checkpoint=True,
              #log_checkpoint_metadata=True,
