@@ -113,8 +113,11 @@ data
 *.pkl
 *.pkl.json
 *.log.json
-#work_dirs/
+work_dirs/
 mmseg/.mim
 
 # Pytorch
 *.pth
+
+tools/artifacts
+tools/wandb
