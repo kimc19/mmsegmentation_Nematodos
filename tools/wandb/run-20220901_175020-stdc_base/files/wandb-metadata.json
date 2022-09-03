@@ -1,0 +1,26 @@
+{
+    "os": "Linux-5.15.0-46-generic-x86_64-with-debian-bullseye-sid",
+    "python": "3.7.13",
+    "heartbeatAt": "2022-09-01T23:50:21.722515",
+    "startedAt": "2022-09-01T23:50:20.704093",
+    "docker": null,
+    "gpu": "GRID A100-2-10C",
+    "gpu_count": 1,
+    "cpu_count": 10,
+    "cuda": null,
+    "args": [
+        "../configs/_nematodos_/stdc/stdc_nematodos.py"
+    ],
+    "state": "running",
+    "program": "train.py",
+    "codePath": "tools/train.py",
+    "git": {
+        "remote": "git@github.com:kimc19/mmsegmentation_Nematodos.git",
+        "commit": "65ef1b20b68f1d7192461299b9d3e0562c4beb1c"
+    },
+    "email": null,
+    "root": "/home/kcarvajal/mmsegmentation_Nematodos",
+    "host": "a100-10",
+    "username": "kcarvajal",
+    "executable": "/home/kcarvajal/anaconda3/envs/openmmlab/bin/python"
+}
