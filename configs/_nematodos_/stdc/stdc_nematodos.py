@@ -84,7 +84,7 @@ dataset_type = 'NematodosDataset'
 data_root = '../data/nematodos'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-crop_size = (512, 512)
+crop_size = (512, 1024)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
@@ -204,7 +204,9 @@ log_config = dict(
                 project='Nematodos_STDC',
                 name='stdc_base',
                 id='stdc_base',
-                notes='Entrenamiento con modelo stdc base con 80k iteraciones'
+                resume='allow',
+                notes=
+                'Entrenamiento con modelo stdc base sin preentrenar con 80k iteraciones'
             ),
             log_checkpoint=True,
             num_eval_images=100)
@@ -226,8 +228,9 @@ lr_config = dict(
     warmup_iters=1000)
 runner = dict(type='IterBasedRunner', max_iters=80000)
 checkpoint_config = dict(by_epoch=False, interval=5000, max_keep_ckpts=2)
-evaluation = dict(interval=8000, metric='mIoU', pre_eval=True)
-work_dir = './work_dirs/isanet'
+evaluation = dict(
+    interval=8000, metric=['mIoU', 'mDice', 'mFscore'], pre_eval=True)
+work_dir = '../work_dirs/isanet'
 seed = 0
 gpu_ids = range(0, 1)
 device = 'cuda'
