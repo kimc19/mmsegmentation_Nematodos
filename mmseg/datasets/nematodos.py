@@ -4,8 +4,8 @@ import os.path as osp
 
 @DATASETS.register_module()
 class NematodosDataset(CustomDataset):
-    CLASSES = ('nematodo','background')
-    PALETTE = [[255, 255, 255], [0, 0, 0]]
+    CLASSES = ('background', 'nematodo')
+    PALETTE = [[0, 0, 0], [255, 255, 255]]
 
     def __init__(self, split, **kwargs):
         super(NematodosDataset, self).__init__(
