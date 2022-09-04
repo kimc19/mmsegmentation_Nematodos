@@ -81,7 +81,7 @@ cfg.data.workers_per_gpu = 2 #Wand support
 cfg.img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 cfg.crop_size = (512, 1024)
-train_pipeline = [
+cfg.train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=True),
     dict(type='Resize', img_scale=(1024, 1024), ratio_range=(0.5, 2.0)),
@@ -131,22 +131,23 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/isanet'
+cfg.work_dir = '../work_dirs/stdc_pretrain'
 
 #Set iterations, and interval of iterations save
-#cfg.runner.max_iters = 40000
-#cfg.evaluation.interval = 40000
 cfg.checkpoint_config.interval = 5000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
 # Set evaluations metrics
 cfg.evaluation.metric=['mIoU','mDice','mFscore']
 
+# Set checkpoint file for pretraining
+cfg.load_from = '../checkpoints/stdc1_in1k-pre_512x1024_80k_cityscapes_20220224_141648-3d4c2981.pth'
+
 # Set seed to facitate reproducing the result
 cfg.seed = 0
 set_random_seed(0, deterministic=False)
-cfg.gpu_ids = range(1)
-cfg.device = 'cuda' #get_device()
+cfg.gpu_ids = 0 #range(1)
+cfg.device = get_device()
 
 # Set hooks: Text, Wandb
 cfg.log_config = dict(
@@ -158,12 +159,12 @@ cfg.log_config = dict(
                  'entity': 'kimc19',
                  'project': 'Nematodos_STDC',
                  'name': 'stdc_base',
-                 'id': 'stdc_base',
+                 'id': 'stdc_base_pretrain',
                  'resume': 'allow',
-                 'notes':'Entrenamiento con modelo stdc base sin preentrenar con 80k iteraciones'
+                 'notes':'Entrenamiento con modelo stdc base preentrenado con 80k iteraciones, batch=8'
                  },
              log_checkpoint=True,
-             #log_checkpoint_metadata=True,
+             log_checkpoint_metadata=True,
              num_eval_images=100)
         ])
 
@@ -172,4 +173,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc_nematodos.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc_nematodos_pretrain.py")
