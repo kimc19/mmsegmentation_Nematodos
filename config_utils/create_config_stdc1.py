@@ -158,7 +158,7 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'kimc19',
                  'project': 'Nematodos_STDC',
-                 'name': 'stdc_base',
+                 'name': 'stdc_base__pretrain',
                  'id': 'stdc_base_pretrain',
                  'resume': 'allow',
                  'notes':'Entrenamiento con modelo stdc base preentrenado con 80k iteraciones, batch=8'
