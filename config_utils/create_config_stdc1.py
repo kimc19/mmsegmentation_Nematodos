@@ -134,10 +134,11 @@ cfg.data.test.split = 'splits/test.txt'
 cfg.work_dir = '../work_dirs/stdc_pretrain'
 
 #Set iterations, and interval of iterations save
-cfg.checkpoint_config.interval = 5000
+cfg.checkpoint_config.interval = 10000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
 # Set evaluations metrics
+cfg.evaluation.interval=10000
 cfg.evaluation.metric=['mIoU','mDice','mFscore']
 
 # Set checkpoint file for pretraining
@@ -151,7 +152,7 @@ cfg.device = get_device()
 
 # Set hooks: Text, Wandb
 cfg.log_config = dict(
-    interval=1000,
+    interval=10000,
     hooks=[
         dict(type='TextLoggerHook', by_epoch=False),
         dict(type='MMSegWandbHook',
