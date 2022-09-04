@@ -117,7 +117,7 @@ work_dirs/
 mmseg/.mim
 
 # Pytorch
-#*.pth
+*.pth
 
 tools/artifacts
 tools/wandb
