@@ -146,7 +146,7 @@ cfg.load_from = '../checkpoints/stdc1_in1k-pre_512x1024_80k_cityscapes_20220224_
 # Set seed to facitate reproducing the result
 cfg.seed = 0
 set_random_seed(0, deterministic=False)
-cfg.gpu_ids = 0 #range(1)
+cfg.gpu_ids = range(1)
 cfg.device = get_device()
 
 # Set hooks: Text, Wandb
