@@ -142,7 +142,7 @@ cfg.evaluation.interval=10000
 cfg.evaluation.metric=['mIoU','mDice','mFscore']
 
 # Set checkpoint file for pretraining
-cfg.load_from = '../checkpoints/stdc1_in1k-pre_512x1024_80k_cityscapes_20220224_141648-3d4c2981.pth'
+#cfg.load_from = '../checkpoints/stdc1_in1k-pre_512x1024_80k_cityscapes_20220224_141648-3d4c2981.pth'
 
 # Set seed to facitate reproducing the result
 cfg.seed = 0
@@ -159,8 +159,8 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'kimc19',
                  'project': 'Nematodos_STDC',
-                 'name': 'stdc_base__pretrain',
-                 'id': 'stdc_base_pretrain',
+                 'name': 'stdc_base_2',
+                 'id': 'stdc_base_2',
                  'resume': 'allow',
                  'notes':'Entrenamiento con modelo stdc base preentrenado con 80k iteraciones, batch=8'
                  },
@@ -174,4 +174,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc_nematodos_pretrain.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc_nematodos_base2.py")
