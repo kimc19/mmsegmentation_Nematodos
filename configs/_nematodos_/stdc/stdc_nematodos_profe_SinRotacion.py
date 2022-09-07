@@ -87,7 +87,7 @@ img_norm_cfg = dict(
 crop_size = (768, 1024)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', reduce_zero_label=True),
+    dict(type='LoadAnnotations'),
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 2.0)),
     #dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
@@ -130,7 +130,7 @@ data = dict(
         ann_dir='annotations',
         pipeline=[
             dict(type='LoadImageFromFile'),
-            dict(type='LoadAnnotations', reduce_zero_label=True),
+            dict(type='LoadAnnotations'),
             dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 2.0)),
             #dict(type='RandomRotate', prob=0.75, degree=30),
             dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
