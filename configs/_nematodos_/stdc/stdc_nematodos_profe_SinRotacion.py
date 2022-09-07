@@ -203,11 +203,11 @@ log_config = dict(
             init_kwargs=dict(
                 entity='kimc19',
                 project='STDC_Prueba',
-                name='profe_SinRot',
-                id='profe_SinRot',
+                name='profe_SinRot2',
+                id='profe_SinRot2',
                 resume='allow',
                 notes=
-                'Prueba entrenamiento modelo stdc base, aumentado profe sin rotación, 5k iteraciones, batch=8'
+                'Prueba entrenamiento modelo stdc base, aumentado profe sin rotación y sin reduce_zero_label=False, 5k iteraciones, batch=8'
             ),
             log_checkpoint=True,
             log_checkpoint_metadata=True,
@@ -232,7 +232,7 @@ runner = dict(type='IterBasedRunner', max_iters=4000)
 checkpoint_config = dict(by_epoch=False, interval=2000, max_keep_ckpts=2)
 evaluation = dict(
     interval=2000, metric=['mIoU', 'mDice', 'mFscore'], pre_eval=True)
-work_dir = '../work_dirs/stdc_profe_SinRot'
+work_dir = '../work_dirs/stdc_profe_SinRot2'
 seed = 0
 gpu_ids = range(0, 1)
 device = 'cuda'
