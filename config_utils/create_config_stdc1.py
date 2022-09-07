@@ -131,14 +131,15 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/stdc_pretrain'
+cfg.work_dir = '../work_dirs/stdc_A2'
 
 #Set iterations, and interval of iterations save
-cfg.checkpoint_config.interval = 10000
+cfg.runner.max_iters = 4000
+cfg.checkpoint_config.interval = 2000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
 # Set evaluations metrics
-cfg.evaluation.interval=10000
+cfg.evaluation.interval=2000
 cfg.evaluation.metric=['mIoU','mDice','mFscore']
 
 # Set checkpoint file for pretraining
@@ -152,17 +153,17 @@ cfg.device = get_device()
 
 # Set hooks: Text, Wandb
 cfg.log_config = dict(
-    interval=10000,
+    interval=1000,
     hooks=[
         dict(type='TextLoggerHook', by_epoch=False),
         dict(type='MMSegWandbHook',
              init_kwargs={
                  'entity': 'kimc19',
-                 'project': 'Nematodos_STDC',
-                 'name': 'stdc_base_2',
-                 'id': 'stdc_base_2',
+                 'project': 'STDC_Prueba',
+                 'name': 'stdc_A2',
+                 'id': 'stdc_A2',
                  'resume': 'allow',
-                 'notes':'Entrenamiento con modelo stdc base preentrenado con 80k iteraciones, batch=8'
+                 'notes':'Prueba entrenamiento modelo stdc base, aumentado 2, 5k iteraciones, batch=8'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -174,4 +175,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc_nematodos_base2.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc_A2.py")
