@@ -211,7 +211,8 @@ log_config = dict(
             ),
             #log_checkpoint=True,
             #log_checkpoint_metadata=True,
-            #num_eval_images=100)
+            #num_eval_images=100
+            )
     ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
