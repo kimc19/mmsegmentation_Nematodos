@@ -199,7 +199,7 @@ log_config = dict(
     hooks=[
         dict(type='TextLoggerHook', by_epoch=False),
         dict(
-            type='MMDetWandbHook',
+            type='WandbLoggerHook',
             init_kwargs=dict(
                 entity='kimc19',
                 project='STDC_Prueba',
@@ -209,9 +209,9 @@ log_config = dict(
                 notes=
                 'Prueba graficas evaluación, sin reduce_zero_label=False, sin rotación, 2k iteraciones, batch=8'
             ),
-            log_checkpoint=True,
-            log_checkpoint_metadata=True,
-            num_eval_images=100)
+            #log_checkpoint=True,
+            #log_checkpoint_metadata=True,
+            #num_eval_images=100)
     ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
