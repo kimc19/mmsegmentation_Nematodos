@@ -142,6 +142,9 @@ cfg.checkpoint_config.max_keep_ckpts = 2
 cfg.evaluation.interval=2000
 cfg.evaluation.metric=['mIoU','mDice','mFscore']
 
+# Set validation loss
+cfg.workflow = [('train', 1), ('val', 1)]
+
 # Set checkpoint file for pretraining
 #cfg.load_from = '../checkpoints/stdc1_in1k-pre_512x1024_80k_cityscapes_20220224_141648-3d4c2981.pth'
 
@@ -157,8 +160,8 @@ cfg.log_config = dict(
     hooks=[
         dict(type='TextLoggerHook', by_epoch=False),
         dict(type='MMSegWandbHook',
-             interval=1000,
-             by_epoch=False,
+             #interval=1000,
+             #by_epoch=False,
              with_step=False,
              init_kwargs={
                  'entity': 'kimc19',
