@@ -80,13 +80,13 @@ cfg.data.workers_per_gpu = 2 #Wand support
 
 cfg.img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-cfg.crop_size = (512, 1024)
+cfg.crop_size = (768, 1024)
 cfg.train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=True),
-    dict(type='Resize', img_scale=(1024, 1024), ratio_range=(0.5, 2.0)),
-    dict(type='RandomRotate', prob=0.75, degree=180),
-    dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.75),
+    dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
+    #dict(type='RandomRotate', prob=0.75, degree=30),
+    dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **cfg.img_norm_cfg),
@@ -99,7 +99,7 @@ cfg.test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(1024, 1024),
+        img_scale=(1024, 768),
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -131,7 +131,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/stdc_A2'
+cfg.work_dir = '../work_dirs/stdc_VM'
 
 #Set iterations, and interval of iterations save
 cfg.runner.max_iters = 4000
@@ -157,13 +157,16 @@ cfg.log_config = dict(
     hooks=[
         dict(type='TextLoggerHook', by_epoch=False),
         dict(type='MMSegWandbHook',
+             interval=1000,
+             by_epoch=False,
+             with_step=False,
              init_kwargs={
                  'entity': 'kimc19',
                  'project': 'STDC_Prueba',
-                 'name': 'stdc_A2',
-                 'id': 'stdc_A2',
+                 'name': 'stdc_VM',
+                 'id': 'stdc_VM',
                  'resume': 'allow',
-                 'notes':'Prueba entrenamiento modelo stdc base, aumentado 2, 5k iteraciones, batch=8'
+                 'notes':'Prueba entrenamiento modelo stdc base, 4k iteraciones, batch=8'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -175,4 +178,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc_A2.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc_VM.py")
