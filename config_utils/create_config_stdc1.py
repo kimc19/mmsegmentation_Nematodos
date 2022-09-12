@@ -77,13 +77,14 @@ cfg.data_root = data_root
 
 cfg.data.samples_per_gpu = 10
 cfg.data.workers_per_gpu = 2 #Wand support
+cfg.val_dataloader=dict(samples_per_gpu=1, workers_per_gpu=2, shuffle=False)
 
 cfg.img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 cfg.crop_size = (768, 1024)
 cfg.train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', reduce_zero_label=True),
+    dict(type='LoadAnnotations'),
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
     dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
