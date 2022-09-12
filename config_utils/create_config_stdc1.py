@@ -4,7 +4,7 @@ from mmseg.apis import set_random_seed
 from mmseg.utils import get_device
 import argparse
 
-parser = argparse.ArgumentParser(description='Generador de máscaras a partir de anotaciones VIA.')
+parser = argparse.ArgumentParser(description='Generador de config files para el modelo stdc.')
 
 parser.add_argument('--data_root', type=str, help='Dirección de la carpeta con los datos.')
 
@@ -75,7 +75,7 @@ cfg.model.auxiliary_head=[
 cfg.dataset_type = 'NematodosDataset'
 cfg.data_root = data_root
 
-cfg.data.samples_per_gpu = 8
+cfg.data.samples_per_gpu = 10
 cfg.data.workers_per_gpu = 2 #Wand support
 
 cfg.img_norm_cfg = dict(
@@ -85,7 +85,7 @@ cfg.train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=True),
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
-    #dict(type='RandomRotate', prob=0.75, degree=30),
+    dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
     dict(type='RandomFlip', prob=0.5),
     dict(type='PhotoMetricDistortion'),
@@ -131,15 +131,15 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/stdc_VM2'
+cfg.work_dir = '../work_dirs/stdc_base'
 
 #Set iterations, and interval of iterations save
-cfg.runner.max_iters = 4000
-cfg.checkpoint_config.interval = 2000
+cfg.runner.max_iters = 80000
+cfg.checkpoint_config.interval = 10000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
 # Set evaluations metrics
-cfg.evaluation.interval=2000
+cfg.evaluation.interval=10000
 cfg.evaluation.metric=['mIoU','mDice','mFscore']
 
 # Set validation loss
@@ -156,20 +156,18 @@ cfg.device = get_device()
 
 # Set hooks: Text, Wandb
 cfg.log_config = dict(
-    interval=1000,
+    interval=10000,
     hooks=[
-        dict(type='TextLoggerHook', by_epoch=False),
+        dict(type='TextLoggerHook', by_epoch=False, interval=5000),
         dict(type='MMSegWandbHook',
-             #interval=1000,
-             #by_epoch=False,
              with_step=False,
              init_kwargs={
                  'entity': 'kimc19',
-                 'project': 'STDC_Prueba',
-                 'name': 'stdc_VM2',
-                 'id': 'stdc_VM2',
+                 'project': 'STDC_Nematodos',
+                 'name': 'stdc_base',
+                 'id': 'stdc_base',
                  'resume': 'allow',
-                 'notes':'Prueba entrenamiento modelo stdc base, 4k iteraciones, batch=8'
+                 'notes':'Entrenamiento modelo stdc base, 80k iteraciones, batch=8, optimizador SGD, lr=0.1, m=0.9'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -181,4 +179,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc_VM2.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc_base.py")
