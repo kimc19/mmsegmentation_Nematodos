@@ -131,7 +131,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/stdc_base'
+cfg.work_dir = '../work_dirs/stdc1_base'
 
 #Set iterations, and interval of iterations save
 cfg.runner.max_iters = 80000
@@ -163,9 +163,9 @@ cfg.log_config = dict(
              with_step=False,
              init_kwargs={
                  'entity': 'kimc19',
-                 'project': 'STDC_Nematodos',
-                 'name': 'stdc_base',
-                 'id': 'stdc_base',
+                 'project': 'STDC1_Nematodos',
+                 'name': 'stdc1_base',
+                 'id': 'stdc1_base',
                  'resume': 'allow',
                  'notes':'Entrenamiento modelo stdc base, 80k iteraciones, batch=8, optimizador SGD, lr=0.1, m=0.9'
                  },
@@ -179,4 +179,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc_base.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc1_base.py")
