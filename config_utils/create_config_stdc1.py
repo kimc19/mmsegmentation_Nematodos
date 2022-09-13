@@ -165,10 +165,10 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'kimc19',
                  'project': 'STDC1_Nematodos',
-                 'name': 'stdc1_base',
-                 'id': 'stdc1_base',
+                 'name': 'stdc1_pretrain',
+                 'id': 'stdc1_pretrain',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo stdc base, 80k iteraciones, batch=8, optimizador SGD, lr=0.1, m=0.9'
+                 'notes':'Entrenamiento modelo stdc preentrenado, 80k iteraciones, batch=8, optimizador SGD, lr=0.1, m=0.9'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -180,4 +180,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc1_base.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc1_pretrain.py")
