@@ -133,4 +133,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/segmenter")
-cfg.dump("../configs/_nematodos_/stdc/segmenter_base.py")
+cfg.dump("../configs/_nematodos_/segmenter/segmenter_base.py")
