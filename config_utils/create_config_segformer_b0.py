@@ -20,6 +20,10 @@ ann_dir = 'annotations'
 
 cfg = Config.fromfile('../configs/segformer/segformer_mit-b0_8x1_1024x1024_160k_cityscapes.py')
 
+# Since we use only one GPU, BN is used instead of SyncBN
+cfg.norm_cfg = dict(type='BN', requires_grad=True)
+cfg.model.decode_head.norm_cfg = cfg.norm_cfg
+
 # Modify num classes of the model in decode/auxiliary head
 cfg.model.decode_head.num_classes = 2
 
