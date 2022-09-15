@@ -20,17 +20,21 @@ ann_dir = 'annotations'
 
 cfg = Config.fromfile('../configs/setr/setr_mla_512x512_160k_b8_ade20k.py')
 
+# Since we use only one GPU, BN is used instead of SyncBN
+cfg.norm_cfg = dict(type='BN', requires_grad=True)
+cfg.model.decode_head.norm_cfg = cfg.norm_cfg
+cfg.model.neck.norm_cfg = cfg.norm_cfg
+
 # Modify num classes of the model in decode/auxiliary head
-norm_cfg = dict(type='BN', requires_grad=True)
 cfg.model.decode_head.num_classes = 2
-cfg.model.auxiliary_headauxiliary_head=[
+cfg.model.auxiliary_head=[
         dict(
             type='FCNHead',
             in_channels=256,
             channels=256,
             in_index=0,
             dropout_ratio=0,
-            norm_cfg=norm_cfg,
+            norm_cfg=cfg.norm_cfg,
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,
@@ -45,7 +49,7 @@ cfg.model.auxiliary_headauxiliary_head=[
             channels=256,
             in_index=1,
             dropout_ratio=0,
-            norm_cfg=norm_cfg,
+            norm_cfg=cfg.norm_cfg,
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,
@@ -60,7 +64,7 @@ cfg.model.auxiliary_headauxiliary_head=[
             channels=256,
             in_index=2,
             dropout_ratio=0,
-            norm_cfg=norm_cfg,
+            norm_cfg=cfg.norm_cfg,
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,
@@ -75,7 +79,7 @@ cfg.model.auxiliary_headauxiliary_head=[
             channels=256,
             in_index=3,
             dropout_ratio=0,
-            norm_cfg=norm_cfg,
+            norm_cfg=cfg.norm_cfg,
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,

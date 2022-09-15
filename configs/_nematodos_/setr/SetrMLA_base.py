@@ -1,5 +1,5 @@
 backbone_norm_cfg = dict(type='LN', eps=1e-06, requires_grad=True)
-norm_cfg = dict(type='SyncBN', requires_grad=True)
+norm_cfg = dict(type='BN', requires_grad=True)
 model = dict(
     type='EncoderDecoder',
     pretrained=None,
@@ -22,7 +22,7 @@ model = dict(
         type='MLANeck',
         in_channels=[1024, 1024, 1024, 1024],
         out_channels=256,
-        norm_cfg=dict(type='SyncBN', requires_grad=True),
+        norm_cfg=dict(type='BN', requires_grad=True),
         act_cfg=dict(type='ReLU')),
     decode_head=dict(
         type='SETRMLAHead',
@@ -32,7 +32,7 @@ model = dict(
         dropout_ratio=0,
         mla_channels=128,
         num_classes=2,
-        norm_cfg=dict(type='SyncBN', requires_grad=True),
+        norm_cfg=dict(type='BN', requires_grad=True),
         align_corners=False,
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
@@ -43,12 +43,12 @@ model = dict(
             channels=256,
             in_index=0,
             dropout_ratio=0,
-            norm_cfg=dict(type='SyncBN', requires_grad=True),
+            norm_cfg=dict(type='BN', requires_grad=True),
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,
             concat_input=False,
-            num_classes=150,
+            num_classes=2,
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
@@ -58,12 +58,12 @@ model = dict(
             channels=256,
             in_index=1,
             dropout_ratio=0,
-            norm_cfg=dict(type='SyncBN', requires_grad=True),
+            norm_cfg=dict(type='BN', requires_grad=True),
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,
             concat_input=False,
-            num_classes=150,
+            num_classes=2,
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
@@ -73,12 +73,12 @@ model = dict(
             channels=256,
             in_index=2,
             dropout_ratio=0,
-            norm_cfg=dict(type='SyncBN', requires_grad=True),
+            norm_cfg=dict(type='BN', requires_grad=True),
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,
             concat_input=False,
-            num_classes=150,
+            num_classes=2,
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
@@ -88,80 +88,18 @@ model = dict(
             channels=256,
             in_index=3,
             dropout_ratio=0,
-            norm_cfg=dict(type='SyncBN', requires_grad=True),
+            norm_cfg=dict(type='BN', requires_grad=True),
             act_cfg=dict(type='ReLU'),
             num_convs=0,
             kernel_size=1,
             concat_input=False,
-            num_classes=150,
+            num_classes=2,
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4))
     ],
     train_cfg=dict(),
-    test_cfg=dict(mode='slide', crop_size=(512, 512), stride=(341, 341)),
-    auxiliary_headauxiliary_head=[
-        dict(
-            type='FCNHead',
-            in_channels=256,
-            channels=256,
-            in_index=0,
-            dropout_ratio=0,
-            norm_cfg=dict(type='BN', requires_grad=True),
-            act_cfg=dict(type='ReLU'),
-            num_convs=0,
-            kernel_size=1,
-            concat_input=False,
-            num_classes=2,
-            align_corners=False,
-            loss_decode=dict(
-                type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
-        dict(
-            type='FCNHead',
-            in_channels=256,
-            channels=256,
-            in_index=1,
-            dropout_ratio=0,
-            norm_cfg=dict(type='BN', requires_grad=True),
-            act_cfg=dict(type='ReLU'),
-            num_convs=0,
-            kernel_size=1,
-            concat_input=False,
-            num_classes=2,
-            align_corners=False,
-            loss_decode=dict(
-                type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
-        dict(
-            type='FCNHead',
-            in_channels=256,
-            channels=256,
-            in_index=2,
-            dropout_ratio=0,
-            norm_cfg=dict(type='BN', requires_grad=True),
-            act_cfg=dict(type='ReLU'),
-            num_convs=0,
-            kernel_size=1,
-            concat_input=False,
-            num_classes=2,
-            align_corners=False,
-            loss_decode=dict(
-                type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
-        dict(
-            type='FCNHead',
-            in_channels=256,
-            channels=256,
-            in_index=3,
-            dropout_ratio=0,
-            norm_cfg=dict(type='BN', requires_grad=True),
-            act_cfg=dict(type='ReLU'),
-            num_convs=0,
-            kernel_size=1,
-            concat_input=False,
-            num_classes=2,
-            align_corners=False,
-            loss_decode=dict(
-                type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4))
-    ])
+    test_cfg=dict(mode='slide', crop_size=(512, 512), stride=(341, 341)))
 dataset_type = 'NematodosDataset'
 data_root = '../data/nematodos'
 img_norm_cfg = dict(
