@@ -4,7 +4,7 @@ from mmseg.apis import set_random_seed
 from mmseg.utils import get_device
 import argparse
 
-parser = argparse.ArgumentParser(description='Generador de config files para el modelo segformer b0.')
+parser = argparse.ArgumentParser(description='Generador de config files para el modelo segformer.')
 
 parser.add_argument('--data_root', type=str, help='Dirección de la carpeta con los datos.')
 
@@ -18,7 +18,7 @@ else:
 img_dir = 'images'
 ann_dir = 'annotations'
 
-cfg = Config.fromfile('../configs/segformer/segformer_mit-b0_8x1_1024x1024_160k_cityscapes.py')
+cfg = Config.fromfile('../configs/segformer/segformer_mit-b3_8x1_1024x1024_160k_cityscapes.py')
 
 # Modify num classes of the model in decode/auxiliary head
 cfg.model.decode_head.num_classes = 2
@@ -85,7 +85,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/segformerb0'
+cfg.work_dir = '../work_dirs/segformer'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 80000
@@ -117,9 +117,9 @@ cfg.log_config = dict(
              with_step=False,
              init_kwargs={
                  'entity': 'kimc19',
-                 'project': 'Segformer_b0_Nematodos',
-                 'name': 'segformerb0_base',
-                 'id': 'segformerb0_base',
+                 'project': 'Segformer_Nematodos',
+                 'name': 'segformer_base',
+                 'id': 'segformer_base',
                  'resume': 'allow',
                  'notes':'Entrenamiento modelo segmenter'
                  },
@@ -133,4 +133,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/segformer")
-cfg.dump("../configs/_nematodos_/segformer/segformerb0_base.py")
+cfg.dump("../configs/_nematodos_/segformer/segformer_base.py")
