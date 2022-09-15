@@ -85,7 +85,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/segmenter'
+cfg.work_dir = '../work_dirs/segformer'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 80000
