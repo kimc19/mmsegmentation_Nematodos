@@ -21,8 +21,8 @@ ann_dir = 'annotations'
 cfg = Config.fromfile('../configs/segformer/segformer_mit-b0_8x1_1024x1024_160k_cityscapes.py')
 
 # Since we use only one GPU, BN is used instead of SyncBN
-cfg.norm_cfg = dict(type='BN', requires_grad=True)
-cfg.model.decode_head.norm_cfg = cfg.norm_cfg
+#cfg.norm_cfg = dict(type='BN', requires_grad=True)
+#cfg.model.decode_head.norm_cfg = cfg.norm_cfg
 
 # Modify num classes of the model in decode/auxiliary head
 cfg.model.decode_head.num_classes = 2
@@ -107,10 +107,10 @@ cfg.workflow = [('train', 1), ('val', 1)]
 #cfg.load_from = '../checkpoints/
 
 # Set seed to facitate reproducing the result
-cfg.seed = 0
-set_random_seed(0, deterministic=False)
-cfg.gpu_ids = range(1)
-cfg.device = get_device()
+#cfg.seed = 0
+#set_random_seed(0, deterministic=False)
+#cfg.gpu_ids = range(1)
+#cfg.device = get_device()
 
 # Set hooks: Text, Wandb
 cfg.log_config = dict(
@@ -137,4 +137,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/segformer")
-cfg.dump("../configs/_nematodos_/segformer/segformerb0_base.py")
+cfg.dump("../configs/_nematodos_/segformer/segformerb0_k80.py")
