@@ -147,8 +147,8 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'kimc19',
                  'project': 'PointRend_Nematodos',
-                 'name': 'pointrend_Pretrain',
-                 'id': 'pointrend_Pretrain',
+                 'name': 'pointrend__Pretrain',
+                 'id': 'pointrend__Pretrain',
                  'resume': 'allow',
                  'notes':'Entrenamiento modelo pointrend pretrain, lr=0.01, m=0.9, A1, 80k iteraciones, batch=2'
                  },
