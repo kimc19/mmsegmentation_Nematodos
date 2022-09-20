@@ -39,8 +39,6 @@ train_pipeline = [
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
     dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
-    dict(type='RandomFlip', prob=0.5),
-    dict(type='PhotoMetricDistortion'),
     dict(
         type='Normalize',
         mean=[123.675, 116.28, 103.53],
@@ -58,7 +56,7 @@ test_pipeline = [
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
+            dict(type='RandomRotate', prob=0.75, degree=30),
             dict(
                 type='Normalize',
                 mean=[123.675, 116.28, 103.53],
@@ -82,8 +80,6 @@ data = dict(
             dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
             dict(type='RandomRotate', prob=0.75, degree=30),
             dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
-            dict(type='RandomFlip', prob=0.5),
-            dict(type='PhotoMetricDistortion'),
             dict(
                 type='Normalize',
                 mean=[123.675, 116.28, 103.53],
@@ -107,7 +103,7 @@ data = dict(
                 flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
+                    dict(type='RandomRotate', prob=0.75, degree=30),
                     dict(
                         type='Normalize',
                         mean=[123.675, 116.28, 103.53],
@@ -131,7 +127,7 @@ data = dict(
                 flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
+                    dict(type='RandomRotate', prob=0.75, degree=30),
                     dict(
                         type='Normalize',
                         mean=[123.675, 116.28, 103.53],
@@ -153,18 +149,19 @@ log_config = dict(
             init_kwargs=dict(
                 entity='seg_nematodos',
                 project='Nematodos',
-                name='dpt_base',
-                id='dpt_base',
+                name='dpt_A2',
+                id='dpt_A2',
                 resume='allow',
                 notes=
-                'Entrenamiento modelo dpt base, batch=2, lr=6e-05, 160k iter'),
+                'Entrenamiento modelo dpt preentrenado, aumentado 2, batch=2, lr=6e-05, 160k iter'
+            ),
             log_checkpoint=True,
             log_checkpoint_metadata=True,
             num_eval_images=100)
     ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = None
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/dpt/dpt_vit-b16_512x512_160k_ade20k/dpt_vit-b16_512x512_160k_ade20k-db31cf52.pth'
 resume_from = None
 workflow = [('train', 1), ('val', 1)]
 cudnn_benchmark = True
@@ -191,7 +188,7 @@ runner = dict(type='IterBasedRunner', max_iters=160000)
 checkpoint_config = dict(by_epoch=False, interval=16000, max_keep_ckpts=2)
 evaluation = dict(
     interval=16000, metric=['mIoU', 'mDice', 'mFscore'], pre_eval=True)
-work_dir = '../work_dirs/dpt'
+work_dir = '../work_dirs/dpt_A2'
 seed = 0
 gpu_ids = range(0, 1)
 device = 'cuda'

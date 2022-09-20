@@ -153,18 +153,19 @@ log_config = dict(
             init_kwargs=dict(
                 entity='seg_nematodos',
                 project='Nematodos',
-                name='dpt_base',
-                id='dpt_base',
+                name='dpt_pretrain',
+                id='dpt_pretrain',
                 resume='allow',
                 notes=
-                'Entrenamiento modelo dpt base, batch=2, lr=6e-05, 160k iter'),
+                'Entrenamiento modelo dpt preentrenado, batch=2, lr=6e-05, 160k iter'
+            ),
             log_checkpoint=True,
             log_checkpoint_metadata=True,
             num_eval_images=100)
     ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = None
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/dpt/dpt_vit-b16_512x512_160k_ade20k/dpt_vit-b16_512x512_160k_ade20k-db31cf52.pth'
 resume_from = None
 workflow = [('train', 1), ('val', 1)]
 cudnn_benchmark = True
@@ -191,7 +192,7 @@ runner = dict(type='IterBasedRunner', max_iters=160000)
 checkpoint_config = dict(by_epoch=False, interval=16000, max_keep_ckpts=2)
 evaluation = dict(
     interval=16000, metric=['mIoU', 'mDice', 'mFscore'], pre_eval=True)
-work_dir = '../work_dirs/dpt'
+work_dir = '../work_dirs/dpt_pretrain'
 seed = 0
 gpu_ids = range(0, 1)
 device = 'cuda'
