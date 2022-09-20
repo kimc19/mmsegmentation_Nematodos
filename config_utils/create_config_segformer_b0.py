@@ -21,8 +21,8 @@ ann_dir = 'annotations'
 cfg = Config.fromfile('../configs/segformer/segformer_mit-b0_8x1_1024x1024_160k_cityscapes.py')
 
 # Since we use only one GPU, BN is used instead of SyncBN
-#cfg.norm_cfg = dict(type='BN', requires_grad=True)
-#cfg.model.decode_head.norm_cfg = cfg.norm_cfg
+cfg.norm_cfg = dict(type='BN', requires_grad=True)
+cfg.model.decode_head.norm_cfg = cfg.norm_cfg
 
 # Modify num classes of the model in decode/auxiliary head
 cfg.model.decode_head.num_classes = 2
@@ -89,7 +89,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/segformerb0'
+cfg.work_dir = '../work_dirs/segformerb0_base'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 80000
@@ -104,13 +104,13 @@ cfg.evaluation.metric=['mIoU','mDice','mFscore']
 cfg.workflow = [('train', 1), ('val', 1)]
 
 # Set checkpoint file for pretraining
-#cfg.load_from = '../checkpoints/
+#cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/segformer/segformer_mit-b0_8x1_1024x1024_160k_cityscapes/segformer_mit-b0_8x1_1024x1024_160k_cityscapes_20211208_101857-e7f88502.pth'
 
 # Set seed to facitate reproducing the result
-#cfg.seed = 0
-#set_random_seed(0, deterministic=False)
-#cfg.gpu_ids = range(1)
-#cfg.device = get_device()
+cfg.seed = 0
+set_random_seed(0, deterministic=False)
+cfg.gpu_ids = range(1)
+cfg.device = get_device()
 
 # Set hooks: Text, Wandb
 cfg.log_config = dict(
@@ -120,8 +120,8 @@ cfg.log_config = dict(
         dict(type='MMSegWandbHook',
              with_step=False,
              init_kwargs={
-                 'entity': 'kimc19',
-                 'project': 'Segformer_b0_Nematodos',
+                 'entity': 'seg_nematodos',
+                 'project': 'Nematodos',
                  'name': 'segformerb0_base',
                  'id': 'segformerb0_base',
                  'resume': 'allow',
@@ -137,4 +137,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/segformer")
-cfg.dump("../configs/_nematodos_/segformer/segformerb0_k80.py")
+cfg.dump("../configs/_nematodos_/segformer/segformerb0_base.py")
