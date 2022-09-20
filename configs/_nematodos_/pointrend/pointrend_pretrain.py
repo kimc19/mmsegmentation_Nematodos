@@ -175,10 +175,10 @@ log_config = dict(
             type='MMSegWandbHook',
             with_step=False,
             init_kwargs=dict(
-                entity='kimc19',
-                project='PointRend_Nematodos',
-                name='pointrend__Pretrain',
-                id='pointrend__Pretrain',
+                entity='seg_nematodos',
+                project='Nematodos',
+                name='pointrend_pretrain',
+                id='pointrend_pretrain',
                 resume='allow',
                 notes=
                 'Entrenamiento modelo pointrend pretrain, lr=0.01, m=0.9, A1, 80k iteraciones, batch=2'

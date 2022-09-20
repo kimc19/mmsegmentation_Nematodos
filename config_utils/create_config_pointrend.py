@@ -114,7 +114,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/PointRend_pretrain'
+cfg.work_dir = '../work_dirs/PointRend_base'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 80000
@@ -129,7 +129,7 @@ cfg.evaluation.metric=['mIoU','mDice','mFscore']
 cfg.workflow = [('train', 1), ('val', 1)]
 
 # Set checkpoint file for pretraining
-cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/point_rend/pointrend_r101_512x1024_80k_cityscapes/pointrend_r101_512x1024_80k_cityscapes_20200711_170850-d0ca84be.pth'
+#cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/point_rend/pointrend_r101_512x1024_80k_cityscapes/pointrend_r101_512x1024_80k_cityscapes_20200711_170850-d0ca84be.pth'
 
 # Set seed to facitate reproducing the result
 cfg.seed = 0
@@ -145,12 +145,12 @@ cfg.log_config = dict(
         dict(type='MMSegWandbHook',
              with_step=False,
              init_kwargs={
-                 'entity': 'kimc19',
-                 'project': 'PointRend_Nematodos',
-                 'name': 'pointrend__Pretrain',
-                 'id': 'pointrend__Pretrain',
+                 'entity': 'seg_nematodos',
+                 'project': 'Nematodos',
+                 'name': 'pointrend_base',
+                 'id': 'pointrend_base',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo pointrend pretrain, lr=0.01, m=0.9, A1, 80k iteraciones, batch=2'
+                 'notes':'Entrenamiento modelo pointrend base, lr=0.01, m=0.9, A1, 80k iteraciones, batch=2'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -162,4 +162,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/pointrend")
-cfg.dump("../configs/_nematodos_/pointrend/pointrend_pretrain.py")
+cfg.dump("../configs/_nematodos_/pointrend/pointrend_base.py")
