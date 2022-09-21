@@ -13,6 +13,8 @@ conda activate openmmlab
 
 cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
+nvidia-smi
+
 python get_flops.py ../configs/_nematodos_/segmenter/segmenterL_base.py
 python get_flops.py ./configs/_nematodos_/segmenter/segmenterL_A2.py
 python get_flops.py ../configs/_nematodos_/dpt/dpt_base.py
