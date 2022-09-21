@@ -9,11 +9,16 @@
 #SBATCH --mail-type=ALL
 
 module load intelpython/3.7
+
+
+WHO=`whoami`
+export PATH=/home/kcarvajal/.conda/envs/openmmlab/bin:$PATH
+eval "$(conda shell.bash hook)"
+
 conda activate openmmlab
 
 cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
-nvidia-smi
 
 python get_flops.py ../configs/_nematodos_/segmenter/segmenterL_base.py
 python get_flops.py ./configs/_nematodos_/segmenter/segmenterL_A2.py
