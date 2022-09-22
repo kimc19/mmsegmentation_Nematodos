@@ -19,15 +19,8 @@ conda activate openmmlab
 
 cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
-echo -e "\n" Modelo segformer b3 "\n"
-python get_flops.py ../configs/_nematodos_/segformer/segformerb3_base.py
-echo -e "\n" Modelo segformer b3 con aumentado 2"\n"
-python get_flops.py ../configs/_nematodos_/segformer/segformerb3_A2.py
+echo -e "\n" Modelo segformer b4 "\n"
+python get_flops.py ../configs/_nematodos_/segformer/segformerb4_base.py
 echo -e "\n" Modelo segformer b5 "\n"
 python get_flops.py ../configs/_nematodos_/segformer/segformerb5_base.py
-echo -e "\n" Modelo setr naive "\n"
-python get_flops.py ../configs/_nematodos_/setr/SetrNaive_base.py
-echo -e "\n" Modelo setr PUP "\n"
-python get_flops.py ../configs/_nematodos_/setr/SetrPUP_base.py
-echo -e "\n" Modelo setr MLA "\n"
-python get_flops.py ../configs/_nematodos_/setr/SetrMLA_base.py
+
