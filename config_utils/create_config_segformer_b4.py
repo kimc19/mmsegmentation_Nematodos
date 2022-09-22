@@ -45,8 +45,6 @@ cfg.train_pipeline = [
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
     dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
-    dict(type='RandomFlip', prob=0.5),
-    dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **cfg.img_norm_cfg),
     dict(type='Pad', size=cfg.crop_size, pad_val=0, seg_pad_val=255),
     dict(type='DefaultFormatBundle'),
@@ -61,7 +59,7 @@ cfg.test_pipeline = [
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
+            dict(type='RandomRotate', prob=0.75, degree=30),
             dict(type='Normalize', **cfg.img_norm_cfg),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
@@ -89,7 +87,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/segformerb4_base'
+cfg.work_dir = '../work_dirs/segformerb4_A2'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 80000
@@ -104,7 +102,7 @@ cfg.evaluation.metric=['mIoU','mDice','mFscore']
 cfg.workflow = [('train', 1), ('val', 1)]
 
 # Set checkpoint file for pretraining
-#cfg.load_from = ''
+cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/segformer/segformer_mit-b4_8x1_1024x1024_160k_cityscapes/segformer_mit-b4_8x1_1024x1024_160k_cityscapes_20211207_080709-07f6c333.pth'
 
 # Set seed to facitate reproducing the result
 cfg.seed = 0
@@ -122,10 +120,10 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'seg_nematodos',
                  'project': 'Nematodos',
-                 'name': 'segformerb4_base',
-                 'id': 'segformerb4_base',
+                 'name': 'segformerb4_A2',
+                 'id': 'segformerb4_A2',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo segformer b4 base'
+                 'notes':'Entrenamiento modelo segformer b4 pretrain, aumentado 2, batch=1, lr=6e-0.5, 160k iter'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -137,4 +135,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/segformer")
-cfg.dump("../configs/_nematodos_/segformer/segformerb4_base.py")
+cfg.dump("../configs/_nematodos_/segformer/segformerb4_A2.py")
