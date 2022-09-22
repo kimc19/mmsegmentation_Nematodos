@@ -21,4 +21,4 @@ cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
 
 echo -e "\n" Modelo segformer stdc1 "\n"
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/stdc1_kabre.py
+CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/stdc/stdc1_kabre.py
