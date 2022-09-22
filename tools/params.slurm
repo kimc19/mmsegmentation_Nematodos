@@ -19,8 +19,8 @@ conda activate openmmlab
 
 cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
-echo -e "\n" Modelo segformer b4 "\n"
-python get_flops.py ../configs/_nematodos_/segformer/segformerb4_base.py
-echo -e "\n" Modelo segformer b5 "\n"
-python get_flops.py ../configs/_nematodos_/segformer/segformerb5_base.py
+echo -e "\n" Modelo segmenter base "\n"
+python get_flops.py ../configs/_nematodos_/segmenter/segmenterB_base.py
+echo -e "\n" Modelo segmenter large "\n"
+python get_flops.py ../configs/_nematodos_/segmenter/segmenterL_base.py
 
