@@ -19,6 +19,11 @@ conda activate openmmlab
 
 cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterB_base.py
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterB_pretrain.py
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterB_A2.py
+
+echo -e "\n" Modelo segformer b4 base "\n"
+CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segformer/segformerb4_base.py
+echo -e "\n" Modelo segformer b4 preentrenado "\n"
+CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segformer/segformerb4_pretrain.py
+echo -e "\n" Modelo segformer b4 con Aumentado 2 "\n"
+CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segformer/segformerb4_A2.py
+
