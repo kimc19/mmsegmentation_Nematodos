@@ -160,11 +160,11 @@ log_config = dict(
             init_kwargs=dict(
                 entity='seg_nematodos',
                 project='Nematodos',
-                name='segformerb2_base',
-                id='segformerb2_base',
+                name='segformerb2_pretrain',
+                id='segformerb2_pretrain',
                 resume='allow',
                 notes=
-                'Entrenamiento modelo segformer base, batch=1, lr=6e-05, 160k iter'
+                'Entrenamiento modelo segformer pretrain, batch=1, lr=6e-05, 160k iter'
             ),
             log_checkpoint=True,
             log_checkpoint_metadata=True,
@@ -172,7 +172,7 @@ log_config = dict(
     ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = None
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/segformer/segformer_mit-b2_8x1_1024x1024_160k_cityscapes/segformer_mit-b2_8x1_1024x1024_160k_cityscapes_20211207_134205-6096669a.pth'
 resume_from = None
 workflow = [('train', 1), ('val', 1)]
 cudnn_benchmark = True
@@ -200,7 +200,7 @@ checkpoint_config = dict(by_epoch=False, interval=16000, max_keep_ckpts=2)
 evaluation = dict(
     interval=16000, metric=['mIoU', 'mDice', 'mFscore'], pre_eval=True)
 checkpoint = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b2_20220624-66e8bf70.pth'
-work_dir = '../work_dirs/segformerb2_base'
+work_dir = '../work_dirs/segformerb2_pretrain'
 seed = 0
 gpu_ids = range(0, 1)
 device = 'cuda'
