@@ -1,4 +1,4 @@
-norm_cfg = dict(type='SyncBN', requires_grad=True)
+norm_cfg = dict(type='BN', requires_grad=True)
 model = dict(
     type='EncoderDecoder',
     pretrained='pretrain/vit-b16_p16_224-80ecf9dd.pth',
@@ -22,7 +22,7 @@ model = dict(
         readout_type='project',
         input_transform='multiple_select',
         in_index=(0, 1, 2, 3),
-        norm_cfg=dict(type='SyncBN', requires_grad=True),
+        norm_cfg=dict(type='BN', requires_grad=True),
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
     auxiliary_head=None,
@@ -191,7 +191,7 @@ runner = dict(type='IterBasedRunner', max_iters=160000)
 checkpoint_config = dict(by_epoch=False, interval=16000, max_keep_ckpts=2)
 evaluation = dict(
     interval=16000, metric=['mIoU', 'mDice', 'mFscore'], pre_eval=True)
-work_dir = '../work_dirs/dpt'
+work_dir = '../work_dirs/dpt_base'
 seed = 0
 gpu_ids = range(0, 1)
 device = 'cuda'
