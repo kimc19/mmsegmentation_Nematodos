@@ -46,8 +46,6 @@ train_pipeline = [
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
     dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
-    dict(type='RandomFlip', prob=0.5),
-    dict(type='PhotoMetricDistortion'),
     dict(
         type='Normalize',
         mean=[123.675, 116.28, 103.53],
@@ -65,7 +63,7 @@ test_pipeline = [
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
+            dict(type='RandomRotate', prob=0.75, degree=30),
             dict(
                 type='Normalize',
                 mean=[123.675, 116.28, 103.53],
@@ -89,8 +87,6 @@ data = dict(
             dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
             dict(type='RandomRotate', prob=0.75, degree=30),
             dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
-            dict(type='RandomFlip', prob=0.5),
-            dict(type='PhotoMetricDistortion'),
             dict(
                 type='Normalize',
                 mean=[123.675, 116.28, 103.53],
@@ -114,7 +110,7 @@ data = dict(
                 flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
+                    dict(type='RandomRotate', prob=0.75, degree=30),
                     dict(
                         type='Normalize',
                         mean=[123.675, 116.28, 103.53],
@@ -138,7 +134,7 @@ data = dict(
                 flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
-                    dict(type='RandomFlip'),
+                    dict(type='RandomRotate', prob=0.75, degree=30),
                     dict(
                         type='Normalize',
                         mean=[123.675, 116.28, 103.53],
@@ -160,11 +156,11 @@ log_config = dict(
             init_kwargs=dict(
                 entity='seg_nematodos',
                 project='Nematodos',
-                name='segformerb3_base',
-                id='segformerb3_base',
+                name='segformerb3_A2',
+                id='segformerb3_A2',
                 resume='allow',
                 notes=
-                'Entrenamiento modelo segformer b3 base, batch=1, lr=6e-05, 160k iter'
+                'Entrenamiento modelo segformer b3 pretrain, aumentado 2, batch=1, lr=6e-05, 160k iter'
             ),
             log_checkpoint=True,
             log_checkpoint_metadata=True,
@@ -172,7 +168,7 @@ log_config = dict(
     ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = None
+load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/segformer/segformer_mit-b3_8x1_1024x1024_160k_cityscapes/segformer_mit-b3_8x1_1024x1024_160k_cityscapes_20211206_224823-a8f8a177.pth'
 resume_from = None
 workflow = [('train', 1), ('val', 1)]
 cudnn_benchmark = True
@@ -200,7 +196,7 @@ checkpoint_config = dict(by_epoch=False, interval=16000, max_keep_ckpts=2)
 evaluation = dict(
     interval=16000, metric=['mIoU', 'mDice', 'mFscore'], pre_eval=True)
 checkpoint = 'https://download.openmmlab.com/mmsegmentation/v0.5/pretrain/segformer/mit_b3_20220624-13b1141c.pth'
-work_dir = '../work_dirs/segformerb3_base'
+work_dir = '../work_dirs/segformerb3_A2'
 seed = 0
 gpu_ids = range(0, 1)
 device = 'cuda'
