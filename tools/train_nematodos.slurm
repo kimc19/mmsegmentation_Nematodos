@@ -19,15 +19,6 @@ conda activate openmmlab
 
 cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
-
-python get_flops.py ../configs/_nematodos_/segmenter/segmenterL_base.py
-python get_flops.py ./configs/_nematodos_/segmenter/segmenterL_A2.py
-python get_flops.py ../configs/_nematodos_/dpt/dpt_base.py
-python get_flops.py ../configs/_nematodos_/dpt/dpt_A2.py
-
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterL_base.py
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterL_pretrain.py
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterL_A2.py
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/dpt/dpt_base.py
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/dpt/dpt_pretrain.py
-CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/dpt/dpt_A2.py
+CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterB_base.py
+CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterB_pretrain.py
+CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segmenter/segmenterB_A2.py
