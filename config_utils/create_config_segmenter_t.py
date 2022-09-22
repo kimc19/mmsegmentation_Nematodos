@@ -4,7 +4,7 @@ from mmseg.apis import set_random_seed
 from mmseg.utils import get_device
 import argparse
 
-parser = argparse.ArgumentParser(description='Generador de config files para el modelo stdc.')
+parser = argparse.ArgumentParser(description='Generador de config files para el modelo segmenter tiny.')
 
 parser.add_argument('--data_root', type=str, help='Dirección de la carpeta con los datos.')
 
@@ -85,7 +85,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/segmenter'
+cfg.work_dir = '../work_dirs/segmenterT'
 
 #Set iterations, and interval of iterations save
 cfg.runner.max_iters = 80000
@@ -116,12 +116,12 @@ cfg.log_config = dict(
         dict(type='MMSegWandbHook',
              with_step=False,
              init_kwargs={
-                 'entity': 'kimc19',
-                 'project': 'Segmenter_Nematodos',
-                 'name': 'segmenter_base',
-                 'id': 'segmenter_base',
+                 'entity': 'seg_nematodos',
+                 'project': 'Nematodos',
+                 'name': 'segmenterT_base',
+                 'id': 'segmenterT_base',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo segmenter'
+                 'notes':'Entrenamiento modelo segmenter tiny'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -133,4 +133,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/segmenter")
-cfg.dump("../configs/_nematodos_/segmenter/segmenter_base.py")
+cfg.dump("../configs/_nematodos_/segmenter/segmenterT_base.py")
