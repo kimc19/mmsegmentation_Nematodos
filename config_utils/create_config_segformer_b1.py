@@ -120,12 +120,12 @@ cfg.log_config = dict(
         dict(type='MMSegWandbHook',
              with_step=False,
              init_kwargs={
-                 'entity': 'kimc19',
+                 'entity': 'seg_nematodos',
                  'project': 'Segformer_b1_Nematodos',
                  'name': 'segformerb1_base',
                  'id': 'segformerb1_base',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo segmenter'
+                 'notes':'Entrenamiento modelo segformer'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
