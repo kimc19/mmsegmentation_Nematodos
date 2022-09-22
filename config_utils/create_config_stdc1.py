@@ -132,7 +132,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/stdc1_base'
+cfg.work_dir = '../work_dirs/stdc1_kabre'
 
 #Set iterations, and interval of iterations save
 cfg.runner.max_iters = 80000
@@ -147,7 +147,7 @@ cfg.evaluation.metric=['mIoU','mDice','mFscore']
 cfg.workflow = [('train', 1), ('val', 1)]
 
 # Set checkpoint file for pretraining
-cfg.load_from = '../checkpoints/stdc1_in1k-pre_512x1024_80k_cityscapes_20220224_141648-3d4c2981.pth'
+#cfg.load_from = '../checkpoints/stdc1_in1k-pre_512x1024_80k_cityscapes_20220224_141648-3d4c2981.pth'
 
 # Set seed to facitate reproducing the result
 cfg.seed = 0
@@ -164,11 +164,11 @@ cfg.log_config = dict(
              with_step=False,
              init_kwargs={
                  'entity': 'kimc19',
-                 'project': 'STDC1_Nematodos',
-                 'name': 'stdc1_pretrain',
-                 'id': 'stdc1_pretrain',
+                 'project': 'Prueba kabre',
+                 'name': 'stdc1',
+                 'id': 'stdc1',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo stdc preentrenado, 80k iteraciones, batch=8, optimizador SGD, lr=0.1, m=0.9'
+                 'notes':'Entrenamiento modelo stdc , 80k iteraciones, batch=8, optimizador SGD, lr=0.1, m=0.9'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -180,4 +180,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc1_pretrain.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc1_kabre.py")
