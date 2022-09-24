@@ -20,6 +20,8 @@ conda activate openmmlab
 cd /work/kcarvajal/mmsegmentation_Nematodos/tools
 
 
+wandb login 719a7e0be50f53f1789f774ff1535ad9e7918ba2
+
 echo -e "\n" Modelo segformer b4 base "\n"
 CUDA_VISIBLE_DEVICES=0 python train.py ../configs/_nematodos_/segformer/segformerb4_base.py
 echo -e "\n" Modelo segformer b4 preentrenado "\n"
