@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 WHO=`whoami`
 export PATH=/home/$WHO/anaconda3/condabin/:$PATH
