@@ -1,8 +1,8 @@
 Executable   = train_a100.py
 Universe     = vanilla
 
-Output       = kim_segformer.out
-Error        = kim_segformer.err
+Output       = /home/kcarvajal/mmsegmentation_Nematodos/logs/kim_segformer.out
+Error        = /home/kcarvajal/mmsegmentation_Nematodos/logs/kim_segformer.err
 request_GPUs = 1
 Request_cpus = 4
 Queue
