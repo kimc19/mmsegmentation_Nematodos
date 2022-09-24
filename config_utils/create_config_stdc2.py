@@ -88,8 +88,6 @@ cfg.train_pipeline = [
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
     dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
-    dict(type='RandomFlip', prob=0.5),
-    dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **cfg.img_norm_cfg),
     dict(type='Pad', size=cfg.crop_size, pad_val=0, seg_pad_val=255),
     dict(type='DefaultFormatBundle'),
@@ -104,12 +102,13 @@ cfg.test_pipeline = [
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
+            dict(type='RandomRotate', prob=0.75, degree=30),
             dict(type='Normalize', **cfg.img_norm_cfg),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
         ])
 ]
+
 
 cfg.data.train.type = cfg.dataset_type
 cfg.data.train.data_root = cfg.data_root
@@ -132,7 +131,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/stdc2_pretrain'
+cfg.work_dir = '../work_dirs/stdc2_A2'
 
 #Set iterations, and interval of iterations save
 cfg.runner.max_iters = 80000
@@ -165,10 +164,10 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'seg_nematodos',
                  'project': 'Nematodos',
-                 'name': 'stdc2_pretrain',
-                 'id': 'stdc2_pretrain',
+                 'name': 'stdc2_A2',
+                 'id': 'stdc2_A2',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo stdc preentrenado, 80k iteraciones, batch=10, optimizador SGD, lr=0.1, m=0.9'
+                 'notes':'Entrenamiento modelo stdc preentrenado, aumentado 2, 80k iteraciones, batch=10, optimizador SGD, lr=0.1, m=0.9'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -180,4 +179,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/stdc")
-cfg.dump("../configs/_nematodos_/stdc/stdc2_pretrain.py")
+cfg.dump("../configs/_nematodos_/stdc/stdc2_A2.py")
