@@ -4,5 +4,4 @@ Universe     = vanilla
 Output       = /home/kcarvajal/mmsegmentation_Nematodos/logs/kim_segformer.out
 Error        = /home/kcarvajal/mmsegmentation_Nematodos/logs/kim_segformer.err
 request_GPUs = 1
-Request_cpus = 4
 Queue
