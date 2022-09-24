@@ -1,4 +1,4 @@
-Executable   = train_a100.py
+Executable   = train_a100.sh
 Universe     = vanilla
 
 Output       = /home/kcarvajal/mmsegmentation_Nematodos/logs/kim_segformer.out
