@@ -43,7 +43,7 @@ cfg.train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
-    dict(type='RandomRotate', prob=0.75, degree=30),
+    dict(type='RandomFlip', prob=0.5),
     dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
     dict(type='Normalize', **cfg.img_norm_cfg),
     dict(type='Pad', size=cfg.crop_size, pad_val=0, seg_pad_val=255),
@@ -65,6 +65,7 @@ cfg.test_pipeline = [
             dict(type='Collect', keys=['img']),
         ])
 ]
+
 
 cfg.data.train.type = cfg.dataset_type
 cfg.data.train.data_root = cfg.data_root
