@@ -44,7 +44,7 @@ train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
-    dict(type='RandomRotate', prob=0.75, degree=30),
+    dict(type='RandomFlip', prob=0.5),
     dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
     dict(
         type='Normalize',
@@ -85,7 +85,7 @@ data = dict(
             dict(type='LoadImageFromFile'),
             dict(type='LoadAnnotations'),
             dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
-            dict(type='RandomRotate', prob=0.75, degree=30),
+            dict(type='RandomFlip', prob=0.5),
             dict(type='RandomCrop', crop_size=(768, 1024), cat_max_ratio=0.25),
             dict(
                 type='Normalize',
