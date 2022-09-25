@@ -105,7 +105,6 @@ test_pipeline = [
     dict(
         type='MultiScaleFlipAug',
         img_scale=(1024, 768),
-        flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
             dict(type='RandomRotate', prob=0.75, degree=30),
@@ -152,7 +151,6 @@ data = dict(
             dict(
                 type='MultiScaleFlipAug',
                 img_scale=(1024, 768),
-                flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
                     dict(type='RandomRotate', prob=0.75, degree=30),
@@ -176,7 +174,6 @@ data = dict(
             dict(
                 type='MultiScaleFlipAug',
                 img_scale=(1024, 768),
-                flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
                     dict(type='RandomRotate', prob=0.75, degree=30),
