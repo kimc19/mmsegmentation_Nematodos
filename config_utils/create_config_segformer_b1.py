@@ -121,11 +121,11 @@ cfg.log_config = dict(
              with_step=False,
              init_kwargs={
                  'entity': 'seg_nematodos',
-                 'project': 'Segformer_b1_Nematodos',
+                 'project': 'SNematodos',
                  'name': 'segformerb1_base',
                  'id': 'segformerb1_base',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo segformer'
+                 'notes':'Entrenamiento modelo segformer base, batch=1, iter 160k, lr=6e-06'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
