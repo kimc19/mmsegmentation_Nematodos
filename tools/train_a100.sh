@@ -7,4 +7,4 @@ eval "$(conda shell.bash hook)"
 conda activate openmmlab
 cd /home/$WHO/mmsegmentation_Nematodos/tools
 
-python train.py ../configs/_nematodos_/segformer/segformerb1_base.py
+python train.py ../configs/_nematodos_/segmenter/segmenterT_base.py
