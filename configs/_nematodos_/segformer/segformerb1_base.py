@@ -158,12 +158,14 @@ log_config = dict(
             type='MMSegWandbHook',
             with_step=False,
             init_kwargs=dict(
-                entity='kimc19',
-                project='Segformer_b1_Nematodos',
+                entity='seg_nematodos',
+                project='SNematodos',
                 name='segformerb1_base',
                 id='segformerb1_base',
                 resume='allow',
-                notes='Entrenamiento modelo segmenter'),
+                notes=
+                'Entrenamiento modelo segformer base, batch=1, iter 160k, lr=6e-06'
+            ),
             log_checkpoint=True,
             log_checkpoint_metadata=True,
             num_eval_images=100)
