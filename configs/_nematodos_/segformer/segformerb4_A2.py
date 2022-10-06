@@ -149,22 +149,7 @@ data = dict(
 log_config = dict(
     interval=16000,
     hooks=[
-        dict(type='TextLoggerHook', by_epoch=False, interval=8000),
-        dict(
-            type='MMSegWandbHook',
-            with_step=False,
-            init_kwargs=dict(
-                entity='seg_nematodos',
-                project='Nematodos',
-                name='segformerb4_A2',
-                id='segformerb4_A2',
-                resume='allow',
-                notes=
-                'Entrenamiento modelo segformer b4 pretrain, aumentado 2, batch=1, lr=6e-0.5, 160k iter'
-            ),
-            log_checkpoint=True,
-            log_checkpoint_metadata=True,
-            num_eval_images=100)
+        dict(type='TextLoggerHook', by_epoch=False, interval=8000)
     ])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
