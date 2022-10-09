@@ -143,7 +143,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/bisenetv2_base'
+cfg.work_dir = '../work_dirs/bisenetv2_pretrain'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 80000
@@ -158,7 +158,7 @@ cfg.evaluation.metric=['mIoU','mDice','mFscore']
 cfg.workflow = [('train', 1), ('val', 1)]
 
 # Set checkpoint file for pretraining
-#cfg.load_from = '../checkpoints/
+cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/bisenetv2/bisenetv2_fcn_ohem_4x4_1024x1024_160k_cityscapes/bisenetv2_fcn_ohem_4x4_1024x1024_160k_cityscapes_20220808_172324-8bf0aaba.pth'
 
 # Set seed to facitate reproducing the result
 cfg.seed = 0
@@ -174,10 +174,10 @@ cfg.log_config = dict(
         dict(type='MMSegWandbHook',
              with_step=False,
              init_kwargs={
-                 'entity': 'kimc19',
-                 'project': 'PointRend_Nematodos',
-                 'name': 'pointrend_base',
-                 'id': 'pointrend_base',
+                 'entity': 'seg_nematodos',
+                 'project': 'Nematodos',
+                 'name': 'bisenetv2_pretrain',
+                 'id': 'bisenetv2_pretrain',
                  'resume': 'allow',
                  'notes':'Entrenamiento modelo bisenetv2 base, lr=0.05, m=0.9, A1, 160k iteraciones, batch=4'
                  },
@@ -191,4 +191,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/bisenetv2")
-cfg.dump("../configs/_nematodos_/bisenetv2/bisenetv2_base.py")
+cfg.dump("../configs/_nematodos_/bisenetv2/bisenetv2_pretrain.py")
