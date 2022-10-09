@@ -97,10 +97,8 @@ cfg.train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
-    dict(type='RandomRotate', prob=0.75, degree=30),
-    dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
     dict(type='RandomFlip', prob=0.5),
-    dict(type='PhotoMetricDistortion'),
+    dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
     dict(type='Normalize', **cfg.img_norm_cfg),
     dict(type='Pad', size=cfg.crop_size, pad_val=0, seg_pad_val=255),
     dict(type='DefaultFormatBundle'),
@@ -143,7 +141,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/bisenetv2_pretrain'
+cfg.work_dir = '../work_dirs/bisenetv2_A2'
 
 #Set iterations, and interval of iterations save
 #cfg.runner.max_iters = 80000
@@ -176,10 +174,10 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'seg_nematodos',
                  'project': 'Nematodos',
-                 'name': 'bisenetv2_pretrain',
-                 'id': 'bisenetv2_pretrain',
+                 'name': 'bisenetv2_A2',
+                 'id': 'bisenetv2_A2',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo bisenetv2 base, lr=0.05, m=0.9, A1, 160k iteraciones, batch=4'
+                 'notes':'Entrenamiento modelo bisenetv2 preentrenado, aumentado 2, lr=0.05, m=0.9, A1, 160k iteraciones, batch=4'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -191,4 +189,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/bisenetv2")
-cfg.dump("../configs/_nematodos_/bisenetv2/bisenetv2_pretrain.py")
+cfg.dump("../configs/_nematodos_/bisenetv2/bisenetv2_A2.py")
