@@ -204,10 +204,10 @@ log_config = dict(
             type='MMSegWandbHook',
             with_step=False,
             init_kwargs=dict(
-                entity='kimc19',
-                project='PointRend_Nematodos',
-                name='pointrend_base',
-                id='pointrend_base',
+                entity='seg_nematodos',
+                project='Nematodos',
+                name='bisenetv2_base',
+                id='bisenetv2_base',
                 resume='allow',
                 notes=
                 'Entrenamiento modelo bisenetv2 base, lr=0.05, m=0.9, A1, 160k iteraciones, batch=4'
