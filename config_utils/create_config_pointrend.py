@@ -52,7 +52,11 @@ cfg.model.decode_head=[
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0))
     ]
 
-# Modify dataset type and path
+#Modify hyperparameters
+model.train_cfg.num_points = 1024
+model.test_cfg.subdivision_num_points = 4096 
+
+#Modify dataset type and path
 cfg.dataset_type = 'NematodosDataset'
 cfg.data_root = data_root
 
@@ -68,8 +72,10 @@ cfg.train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
     dict(type='Resize', img_scale=(1024, 768), ratio_range=(0.5, 1.5)),
-    dict(type='RandomFlip', prob=0.5),
+    dict(type='RandomRotate', prob=0.75, degree=30),
     dict(type='RandomCrop', crop_size=cfg.crop_size, cat_max_ratio=0.25),
+    dict(type='RandomFlip', prob=0.5),
+    dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **cfg.img_norm_cfg),
     dict(type='Pad', size=cfg.crop_size, pad_val=0, seg_pad_val=255),
     dict(type='DefaultFormatBundle'),
@@ -112,10 +118,10 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/PointRend_A2'
+cfg.work_dir = '../work_dirs/PointRend_P1024'
 
 #Set iterations, and interval of iterations save
-#cfg.runner.max_iters = 80000
+cfg.runner.max_iters = 30000
 cfg.checkpoint_config.interval = 10000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
@@ -127,7 +133,7 @@ cfg.evaluation.metric=['mIoU','mDice','mFscore']
 cfg.workflow = [('train', 1), ('val', 1)]
 
 # Set checkpoint file for pretraining
-cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/point_rend/pointrend_r101_512x1024_80k_cityscapes/pointrend_r101_512x1024_80k_cityscapes_20200711_170850-d0ca84be.pth'
+#cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/point_rend/pointrend_r101_512x1024_80k_cityscapes/pointrend_r101_512x1024_80k_cityscapes_20200711_170850-d0ca84be.pth'
 
 # Set seed to facitate reproducing the result
 cfg.seed = 0
@@ -145,10 +151,10 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'seg_nematodos',
                  'project': 'Nematodos',
-                 'name': 'pointrend_A2',
-                 'id': 'pointrend_A2',
+                 'name': 'pointrend_P1024',
+                 'id': 'pointrend_P1024',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo pointrend preentrenado, aumentado 2, lr=0.01, m=0.9, A1, 80k iteraciones, batch=2'
+                 'notes':'Entrenamiento modelo pointrend base, puntos 1024, lr=0.01, m=0.9, A1, 30k iteraciones, batch=2'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -160,4 +166,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/pointrend")
-cfg.dump("../configs/_nematodos_/pointrend/pointrend_A2.py")
+cfg.dump("../configs/_nematodos_/pointrend/pointrend_P1024.py")
