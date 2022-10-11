@@ -53,8 +53,8 @@ cfg.model.decode_head=[
     ]
 
 #Modify hyperparameters
-model.train_cfg.num_points = 1024
-model.test_cfg.subdivision_num_points = 4096 
+cfg.model.train_cfg.num_points = 1024
+cfg.model.test_cfg.subdivision_num_points = 4096 
 
 #Modify dataset type and path
 cfg.dataset_type = 'NematodosDataset'
