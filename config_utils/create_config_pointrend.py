@@ -53,8 +53,8 @@ cfg.model.decode_head=[
     ]
 
 #Modify hyperparameters
-cfg.model.train_cfg.num_points = 1024
-cfg.model.test_cfg.subdivision_num_points = 4096 
+cfg.model.train_cfg.num_points = 3136
+cfg.model.test_cfg.subdivision_num_points = 6272
 
 #Modify dataset type and path
 cfg.dataset_type = 'NematodosDataset'
@@ -118,7 +118,7 @@ cfg.data.test.ann_dir = ann_dir
 cfg.data.test.pipeline = cfg.test_pipeline
 cfg.data.test.split = 'splits/test.txt'
 
-cfg.work_dir = '../work_dirs/PointRend_P1024'
+cfg.work_dir = '../work_dirs/PointRend_P3136'
 
 #Set iterations, and interval of iterations save
 cfg.runner.max_iters = 30000
@@ -151,10 +151,10 @@ cfg.log_config = dict(
              init_kwargs={
                  'entity': 'seg_nematodos',
                  'project': 'Hiperparametros_PointRend',
-                 'name': 'pointrend_P1024',
-                 'id': 'pointrend_P1024',
+                 'name': 'pointrend_P3136',
+                 'id': 'pointrend_P3136',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo pointrend base, puntos 1024, lr=0.01, m=0.9, A1, 30k iteraciones, batch=2'
+                 'notes':'Entrenamiento modelo pointrend base, puntos 3136, lr=0.01, m=0.9, A1, 30k iteraciones, batch=2'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
@@ -166,4 +166,4 @@ print(f'Config:\n{cfg.pretty_text}')
 
 # Save config file
 mkdir_or_exist("../configs/_nematodos_/pointrend")
-cfg.dump("../configs/_nematodos_/pointrend/pointrend_P1024.py")
+cfg.dump("../configs/_nematodos_/pointrend/pointrend_P3136.py")
