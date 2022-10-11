@@ -150,7 +150,7 @@ cfg.log_config = dict(
              with_step=False,
              init_kwargs={
                  'entity': 'seg_nematodos',
-                 'project': 'Nematodos',
+                 'project': 'Hiperparametros_PointRend',
                  'name': 'pointrend_P1024',
                  'id': 'pointrend_P1024',
                  'resume': 'allow',
