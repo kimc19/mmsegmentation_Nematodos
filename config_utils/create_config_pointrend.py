@@ -121,7 +121,7 @@ cfg.data.test.split = 'splits/test.txt'
 cfg.work_dir = '../work_dirs/PointRend_P3136'
 
 #Set iterations, and interval of iterations save
-cfg.runner.max_iters = 30000
+#cfg.runner.max_iters = 30000
 cfg.checkpoint_config.interval = 10000
 cfg.checkpoint_config.max_keep_ckpts = 2
 
@@ -134,6 +134,7 @@ cfg.workflow = [('train', 1), ('val', 1)]
 
 # Set checkpoint file for pretraining
 #cfg.load_from = 'https://download.openmmlab.com/mmsegmentation/v0.5/point_rend/pointrend_r101_512x1024_80k_cityscapes/pointrend_r101_512x1024_80k_cityscapes_20200711_170850-d0ca84be.pth'
+cfg.resume_from = 'checkpoints/pointrend_P3136_30k'
 
 # Set seed to facitate reproducing the result
 cfg.seed = 0
@@ -150,11 +151,11 @@ cfg.log_config = dict(
              with_step=False,
              init_kwargs={
                  'entity': 'seg_nematodos',
-                 'project': 'Hiperparametros_PointRend',
+                 'project': 'Nematodos',
                  'name': 'pointrend_P3136',
                  'id': 'pointrend_P3136',
                  'resume': 'allow',
-                 'notes':'Entrenamiento modelo pointrend base, puntos 3136, lr=0.01, m=0.9, A1, 30k iteraciones, batch=2'
+                 'notes':'Entrenamiento modelo pointrend base, puntos= P3136, lr=0.01, m=0.9, A1, 80k iteraciones, batch=2'
                  },
              log_checkpoint=True,
              log_checkpoint_metadata=True,
