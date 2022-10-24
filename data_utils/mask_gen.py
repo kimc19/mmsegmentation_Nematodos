@@ -49,9 +49,9 @@ for i in img_keys:
             x_list = current_img['regions'][0]['shape_attributes']['all_points_x']
             y_list = current_img['regions'][0]['shape_attributes']['all_points_y']
             coords = list(zip(x_list, y_list))
-            new_img = Image.new("RGB", img_dims)
+            new_img = Image.new("RGB", size = img_dims, color = (70, 130, 180))
             img1 = ImageDraw.Draw(new_img)
-            img1.polygon(coords, fill = 'white', outline = 'white')
+            img1.polygon(coords, fill = (220, 20, 60), outline = (220, 20, 60))
             
             # save mask
             new_name = osp.splitext(img_name)[0] + '.png'
