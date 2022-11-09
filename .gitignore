@@ -124,3 +124,4 @@ tools/wandb/
 logs/
 checkpoints/
 tools/example.py
+results/
