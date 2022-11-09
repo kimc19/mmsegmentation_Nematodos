@@ -121,3 +121,4 @@ mmseg/.mim
 
 tools/artifacts
 tools/wandb
+logs/
