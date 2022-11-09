@@ -120,5 +120,7 @@ mmseg/.mim
 *.pth
 
 tools/artifacts
-tools/wandb
+tools/wandb/
 logs/
+checkpoints/
+tools/example.py
